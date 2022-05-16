@@ -64,7 +64,7 @@ def kmeans(data, k):
         labels = assign_to_clusters(data,prev_centroids)
         current_centroids = recompute_centroids(data, labels, k)
 
-    prev_centroids  = np.around(prev_centroids, decimals=3)
+
     return labels, np.around(current_centroids,3)
 
 
@@ -78,15 +78,14 @@ def visualize_results(data, labels, centroids, path):
     """
 
     k = centroids.shape[0]
-    plt.scatter(data[:, 0], data[:, 1], c=labels, linewidths=0.5)
-    plt.xlabel('$cnt$')
-    plt.ylabel('$hum$')
-    plt.title(F'Results for kmeans with k = {k}')
-    for i in range(len(centroids)):
-        plt.scatter(centroids[i, 0], centroids[i, 1], color='white', edgecolors='black', marker='*')
 
-    plt.show()
-    plt.savefig(path)
+    path.scatter(data[:, 0], data[:, 1], c=labels, linewidths=0.5)
+    path.set_xlabel('$cnt$',fontsize=16)
+    path.set_ylabel('$hum$',fontsize=16)
+    path.set_title(f"Results for kmeans with k = {k}",fontsize=16)
+    for i in range(len(centroids)):
+        path.scatter(centroids[i, 0], centroids[i, 1], color='white', edgecolors='black', marker='*')
+
 
 
 def dist(x, y):
@@ -110,15 +109,19 @@ def assign_to_clusters(data, centroids):
     n = data.shape[0]
     k = centroids.shape[0]
     distances = get_distances(data, n, k, centroids)
-    labels = split_into_clusters(distances, n, k)
-    return labels
-
-def split_into_clusters(distances, n, k): #checked?
     labels = distances.argmin(axis=0)
     return labels
 
 
 def get_distances(data, n, k, centroids):
+    """
+    Helping function - creates a numpy array of distances of all points to all centroids
+    :param data: numpy array of data points
+    :param n: number of data elements
+    :param k: number of centroids
+    :param centroids:  centroid coordinates
+    :return:  distances numpy array
+    """
     distance = np.ones(shape=(k, n))
     for index, pair in enumerate(data):
         for i in range(k):
