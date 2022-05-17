@@ -79,14 +79,14 @@ def visualize_results(data, labels, centroids, path):
 
     k = centroids.shape[0]
 
-    path.scatter(data[:, 0], data[:, 1], c=labels, linewidths=0.5)
-    path.set_xlabel('$cnt$',fontsize=16)
-    path.set_ylabel('$hum$',fontsize=16)
-    path.set_title(f"Results for kmeans with k = {k}",fontsize=16)
+    plt.scatter(data[:, 0], data[:, 1], c=labels, linewidths=0.5)
+    plt.xlabel('$cnt$',fontsize=16)
+    plt.ylabel('$hum$',fontsize=16)
+    plt.title(f"Results for kmeans with k = {k}",fontsize=16)
     for i in range(len(centroids)):
-        path.scatter(centroids[i, 0], centroids[i, 1], color='white', edgecolors='black', marker='*')
+        plt.scatter(centroids[i, 0], centroids[i, 1], color='white', edgecolors='black', marker='*')
 
-
+    plt.savefig(path)
 
 def dist(x, y):
     """
