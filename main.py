@@ -30,8 +30,7 @@ def main(argv):
 
     path_fig = "./plots.pdf"
 
-    fig = plt.figure(figsize=(10, 10))
-  #  fig, (ax1, ax2, ax3) = plt.subplots(3, 1,constrained_layout=True)
+    fig = plt.figure(figsize=(10, 12))
 
     ax1 = fig.add_axes([0.15, 0.7, 0.7, 0.22])
     clustering.visualize_results(num_data,labels_k2,centroids_k2, ax1)
